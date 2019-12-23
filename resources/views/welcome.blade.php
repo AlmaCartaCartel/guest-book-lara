@@ -109,7 +109,7 @@
                 <div>
                     <h3>Comments</h3>
                     <div>
-                        <ul id="comments" style="list-style: none" data-auth="{!! Auth::check() ? true : false !!}" data-nesting="2">
+                        <ul id="comments" style="list-style: none" data-auth="{!! Auth::check() ? true : false !!}" data-nesting="{!! Config::get('constants.nesting') !!}">
                         </ul>
                     </div>
                     <form action="{{ route('comment.add') }}" method="post" class="comment" id="form">

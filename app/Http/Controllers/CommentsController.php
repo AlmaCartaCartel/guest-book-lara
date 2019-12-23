@@ -11,9 +11,7 @@ class CommentsController extends Controller
 
     public function index()
     {
-        $comments = Comment::all();
-
-        return view('welcome', ['comments' => $this->transformData($comments)]);
+        return view('welcome');
     }
 
     public function store(Request $request)
@@ -32,23 +30,9 @@ class CommentsController extends Controller
         return $comment;
     }
 
-    private function transformData($comments, $id = 0, $inc = 0)
-    {
-        $parent = [];
-        foreach ($comments as $comment){
-            if ($comment['comment_id'] == $id  and $inc <= 2){
-                $comment['parent'] = $inc;
-                $comment['answers'] = self::transformData($comments, $comment['id'], $inc + 1);
-                array_push($parent, $comment);
-            }
-        }
-        return $parent;
-    }
-
     public function all()
     {
         $comment = Comment::all();
-
-        return $this->transformData($comment);
+        return Comment::transformData($comment);
     }
 }
