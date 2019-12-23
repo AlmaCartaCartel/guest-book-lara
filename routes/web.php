@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'CommentsControler@index');
+Route::post('/comment/add', 'CommentsControler@add')->name('comment.add');
+
