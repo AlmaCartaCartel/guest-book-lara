@@ -85,6 +85,7 @@ function renderComments(arr, container = null){
             renderComments(comment.answers,  com.querySelector('ul'));
         }
     }
+    func()
 }
 
 function applyPostId() {
@@ -129,4 +130,8 @@ if (form !== null){
         document.getElementById('textarea').value = '';
         document.querySelector('.comment_id').value = '0';
     });
+}
+
+function func() {
+    console.log(document.getElementById('comments').children)
 }

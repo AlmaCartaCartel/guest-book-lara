@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\CustomCollection;
 use App\Http\Requests\Coment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class CommentsController extends Controller
 {
@@ -17,16 +20,12 @@ class CommentsController extends Controller
 
     public function store(Coment $request)
     {
-
-//        $this->validate($request, [
-//            'message' => 'required'
-//        ]);
         $request->validated();
 
         $comment = new Comment();
-        $comment->message = $request->get('message');
-        $comment->user_name = Auth::user()->name;
-        $comment->comment_id = $request->get('comment_id');
+        $comment-> message = $request->get('message');
+        $comment-> user_name = Auth::user() -> name;
+        $comment-> comment_id = $request->get('comment_id');
 
         $comment->save();
         return $comment;

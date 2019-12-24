@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d47d022-834a-4a7a-8f73-c8d61024b50a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/guest-book-lara.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/guest-book-lara.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Comment.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/scripts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +118,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\DELL Latitude E6530\Downloads\OSPanel\domains\guest-book-lara" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -154,7 +156,11 @@
       <updated>1577124099786</updated>
       <workItem from="1577124104590" duration="5000" />
       <workItem from="1577174602166" duration="812000" />
-      <workItem from="1577176037841" duration="2512000" />
+      <workItem from="1577176037841" duration="3606000" />
+      <workItem from="1577188615299" duration="62000" />
+      <workItem from="1577198267732" duration="1368000" />
+      <workItem from="1577199658488" duration="1195000" />
+      <workItem from="1577201102133" duration="2504000" />
     </task>
     <servers />
   </component>
@@ -162,22 +168,22 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1493" height="190" key="GridCell.Tab.0.bottom" timestamp="1577176459259">
+    <state width="1493" height="190" key="GridCell.Tab.0.bottom" timestamp="1577183743878">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="190" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1577176459259" />
-    <state width="1493" height="190" key="GridCell.Tab.0.center" timestamp="1577176459258">
+    <state width="1493" height="190" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1577183743878" />
+    <state width="1493" height="190" key="GridCell.Tab.0.center" timestamp="1577183743878">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="190" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1577176459258" />
-    <state width="1493" height="190" key="GridCell.Tab.0.left" timestamp="1577176459257">
+    <state width="1493" height="190" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1577183743878" />
+    <state width="1493" height="190" key="GridCell.Tab.0.left" timestamp="1577183743877">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="190" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1577176459257" />
-    <state width="1493" height="190" key="GridCell.Tab.0.right" timestamp="1577176459258">
+    <state width="1493" height="190" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1577183743877" />
+    <state width="1493" height="190" key="GridCell.Tab.0.right" timestamp="1577183743878">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="190" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1577176459258" />
+    <state width="1493" height="190" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1577183743878" />
     <state x="444" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1577176039818">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
