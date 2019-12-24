@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
-use App\CustomCollection;
 use App\Http\Requests\Coment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +32,7 @@ class CommentsController extends Controller
 
     public function all()
     {
-        $comment = Comment::all();
+        $comment = DB::table('comments')->where('comment_id', 0)->paginate();
         return Comment::transformData($comment);
     }
 }
