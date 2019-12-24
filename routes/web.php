@@ -12,8 +12,10 @@
 */
 
 Auth::routes();
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'CommentsController@index');
+
 Route::post('/comments/add', 'CommentsController@store')->name('comment.add');
 Route::get('/comments/all', 'CommentsController@all');

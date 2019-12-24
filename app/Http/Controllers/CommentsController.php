@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Http\Requests\Coment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,12 +15,13 @@ class CommentsController extends Controller
         return view('welcome');
     }
 
-    public function store(Request $request)
+    public function store(Coment $request)
     {
 
-        $this->validate($request, [
-            'message' => 'required'
-        ]);
+//        $this->validate($request, [
+//            'message' => 'required'
+//        ]);
+        $request->validated();
 
         $comment = new Comment();
         $comment->message = $request->get('message');
