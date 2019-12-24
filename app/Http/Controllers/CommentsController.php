@@ -6,6 +6,7 @@ use App\Comment;
 use App\Http\Requests\Coment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 
@@ -32,7 +33,11 @@ class CommentsController extends Controller
 
     public function all()
     {
-        $comment = DB::table('comments')->where('comment_id', 0)->paginate();
-        return Comment::transformData($comment);
+        $paginate = Config::get('constants.paginate');
+
+        $parent_comments = DB::table('comments')->where('comment_id', 0)->paginate($paginate);
+        $comments = DB::table('comments')->where('comment_id', '>' , 0)->get();
+
+        return Comment::transformData($parent_comments, $comments);
     }
 }
