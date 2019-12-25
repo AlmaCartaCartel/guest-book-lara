@@ -1,21 +1,24 @@
-async function getComments() {
-    let response = await fetch('/comments/all');
+async function getComments(page) {
+    let response = await fetch(page);
 
     if (!response.ok){
         throw new Error(
             `Не удалось запросить данные по адресу`
         );
     }
-    return response.json();
+    let comments = document.getElementById('comments');
+    comments.innerHTML = await response.text();
+
+    paginateSet();
+    applyPostId();
 }
 
 function addComment(comment){
     const allAnswers = document.querySelectorAll('.answers');
-
     comment.then(
         res => {
             if (res.comment_id == 0){
-                document.getElementById('comments').appendChild(createComment(res))
+                document.querySelector('.comments').appendChild(createComment(res))
             }else{
                 for (let elem of allAnswers){
                     let bool = false;
@@ -74,20 +77,6 @@ function createComment(comment, bool = false, removebtn = false) {
     return li;
 }
 
-function renderComments(arr, container = null){
-    if (container === null){
-        container = document.getElementById('comments');
-    }
-    for (let comment of arr){
-        let com = createComment(comment);
-        container.appendChild(com);
-        if (comment.answers.length > 0){
-            renderComments(comment.answers,  com.querySelector('ul'));
-        }
-    }
-    func()
-}
-
 function applyPostId() {
     const comment_id = document.querySelector('.comment_id');
     const answers = document.querySelectorAll('.answer');
@@ -103,12 +92,6 @@ function applyPostId() {
         })
     }
 }
-getComments().then(
-    res => {
-        renderComments(res);
-    }
-).then(() => applyPostId());
-
 let form = document.getElementById('form');
 
 if (form !== null){
@@ -125,13 +108,25 @@ if (form !== null){
                 `Не удалось запросить данные по адресу`
             );
         }
-
         await addComment(response.json());
+
         document.getElementById('textarea').value = '';
         document.querySelector('.comment_id').value = '0';
     });
 }
 
-function func() {
-    console.log(document.getElementById('comments').children)
+function paginateSet() {
+    let paginate = document.querySelector('.pagination');
+
+    let links = paginate.getElementsByTagName('a');
+
+    for (let link of links){
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            let page = link.href;
+            console.log(page);
+            getComments(page);
+        })
+    }
 }
+getComments('/comments/all?page=1');

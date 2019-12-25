@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Http\Requests\Coment;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
-
 
 class CommentsController extends Controller
 {
@@ -31,13 +30,18 @@ class CommentsController extends Controller
         return $comment;
     }
 
-    public function all()
+    public function all(Request $request)
     {
+        $page = $request->get('page');
         $paginate = Config::get('constants.paginate');
 
-        $parent_comments = DB::table('comments')->where('comment_id', 0)->paginate($paginate);
-        $comments = DB::table('comments')->where('comment_id', '>' , 0)->get();
+        $comments = Comment::all();
+        $comments_pag = collect(Comment::transformData($comments));
+        $count = $comments_pag -> count();
 
-        return Comment::transformData($parent_comments, $comments);
+        $pag = new LengthAwarePaginator($comments_pag->forPage($page, $paginate), $count, $paginate, $page);
+        $pag->withPath('comments/all');
+
+        return view('comments', ['comments' => $pag]);
     }
 }
