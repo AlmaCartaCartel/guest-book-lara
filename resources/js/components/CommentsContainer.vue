@@ -34,8 +34,26 @@
                     ).catch(
                         res => console.log(new Error(res))
                     ).then(
-                        () => this.setPaginate()
+                        () => {
+                            this.setPaginate();
+                            this.applyPostId();
+                        }
                     )
+            },
+            applyPostId: function() {
+                const comment_id = document.querySelector('.comment_id');
+                const answers = document.querySelectorAll('.answer');
+                for (let i = 0; i < answers.length; i++){
+                    answers[i].addEventListener('click', function () {
+
+                        comment_id.value = this.dataset.commentid;
+                        const blockID = 'form';
+                        document.getElementById(blockID).scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        })
+                    })
+                }
             }
         },
         mounted() {

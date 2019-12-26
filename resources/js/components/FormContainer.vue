@@ -1,11 +1,20 @@
 <template>
-    <form ref="form" method="post" class="comment" id="form" v-on:submit="sendMessage">
-    </form>
+    <div>
+        <form ref="form" method="post" class="comment" id="form" v-on:submit="sendMessage">
+
+        </form>
+        {{ message }}
+    </div>
 </template>
 
 <script>
     export default {
         name: "FormContainer",
+        data: () => {
+          return{
+              message: '12'
+          }
+        },
         methods: {
             getForm: async function () {
                 let response = await axios.get('/comments/form');
@@ -26,7 +35,7 @@
 
                 let response = await axios.post('/comments/add', new FormData(this.$refs.form));
 
-                this.$refs.form.innerText = await response.data;
+                let comment = await response.data;
             }
         },
         mounted() {

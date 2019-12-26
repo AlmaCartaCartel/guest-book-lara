@@ -1980,8 +1980,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       })["catch"](function (res) {
         return console.log(new Error(res));
       }).then(function () {
-        return _this2.setPaginate();
+        _this2.setPaginate();
+
+        _this2.applyPostId();
       });
+    },
+    applyPostId: function applyPostId() {
+      var comment_id = document.querySelector('.comment_id');
+      var answers = document.querySelectorAll('.answer');
+
+      for (var i = 0; i < answers.length; i++) {
+        answers[i].addEventListener('click', function () {
+          comment_id.value = this.dataset.commentid;
+          var blockID = 'form';
+          document.getElementById(blockID).scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        });
+      }
     }
   },
   mounted: function mounted() {
@@ -2013,8 +2030,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FormContainer",
+  data: function data() {
+    return {
+      message: '12'
+    };
+  },
   methods: {
     getForm: function () {
       var _getForm = _asyncToGenerator(
@@ -2063,7 +2089,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _sendMessage = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
-        var response;
+        var response, comment;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -2078,9 +2104,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return response.data;
 
               case 6:
-                this.$refs.form.innerText = _context2.sent;
+                comment = _context2.sent;
+                console.log(comment);
+                this.addComment(comment);
 
-              case 7:
+              case 9:
               case "end":
                 return _context2.stop();
             }
@@ -2093,7 +2121,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return sendMessage;
-    }()
+    }(),
+    addComment: function addComment(comment) {
+      var allAnswers = document.querySelectorAll('.answers');
+
+      if (res.comment_id == 0) {
+        document.querySelector('.comments').appendChild(createComment(res));
+      } else {
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = allAnswers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var elem = _step.value;
+            var bool = false;
+
+            if (res.comment_id === elem.dataset.commentid) {
+              if (res.parent == document.getElementById('comments').dataset.nesting) {
+                bool = true;
+              }
+
+              var com = createComment(res, true, bool);
+              elem.appendChild(com);
+              com.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+      }
+    }
   },
   mounted: function mounted() {
     this.change();
@@ -38283,12 +38355,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", {
-    ref: "form",
-    staticClass: "comment",
-    attrs: { method: "post", id: "form" },
-    on: { submit: _vm.sendMessage }
-  })
+  return _c("div", [
+    _c("form", {
+      ref: "form",
+      staticClass: "comment",
+      attrs: { method: "post", id: "form" },
+      on: { submit: _vm.sendMessage }
+    }),
+    _vm._v("\n    " + _vm._s(_vm.message) + "\n")
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
