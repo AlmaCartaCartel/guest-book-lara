@@ -60,13 +60,9 @@ function createComment(comment, bool = false, removebtn = false) {
             <h3 class="author">${comment.user_name}
                 ${bool ? isNewComment: ''}
             </h3>
-
             <pre>${comment.message}</pre>
-
             <div class="d-flex justify-content-between">
-
                 ${auth ? answer: ''}
-
                 <span>${comment.updated_at}</span>
             </div>
         </div>
@@ -96,7 +92,7 @@ let form = document.getElementById('form');
 
 if (form !== null){
     btn = document.getElementById('submit');
-    form.addEventListener('submit',    async function (event) {
+    form.addEventListener('submit',async function (event) {
         event.preventDefault();
 
         let response = await fetch('/comments/add',{
@@ -124,9 +120,9 @@ function paginateSet() {
         link.addEventListener('click', function (event) {
             event.preventDefault();
             let page = link.href;
-            console.log(page);
+
             getComments(page);
         })
     }
 }
-getComments('/comments/all?page=1');
+// getComments('/comments/all?page=1');

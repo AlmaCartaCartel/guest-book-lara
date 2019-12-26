@@ -42,6 +42,11 @@ class CommentsController extends Controller
         $pag = new LengthAwarePaginator($comments_pag->forPage($page, $paginate), $count, $paginate, $page);
         $pag->withPath('comments/all');
 
-        return view('comments', ['comments' => $pag]);
+        return view('components.comments', ['comments' => $pag]);
+    }
+
+    public function form()
+    {
+        return view('components.form');
     }
 }

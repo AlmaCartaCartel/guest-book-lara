@@ -103,31 +103,26 @@
         @endif
 
         <div class="content">
-
             <div>
                 <h1>Home page</h1>
+
                 <div>
                     <h3>Comments</h3>
                     <div>
                         <ul id="comments" style="list-style: none" data-auth="{!! Auth::check() ? true : false !!}" data-nesting="{!! Config::get('constants.nesting') !!}">
+
                         </ul>
                     </div>
-                    <form action="{{ route('comment.add') }}" method="post" class="comment" id="form">
-                        {{ csrf_field() }}
-                        <h4> Message </h4>
-
-                        <input type="hidden" name="comment_id" value='0' class="comment_id">
-                        <textarea name="message" id="textarea" class="form-control" cols="30" rows="3" placeholder="Введите комментарий"></textarea><br>
-
-                        <button id="submit" class="btn btn-success submit"> Submit</button>
-                    </form>
                 </div>
             </div>
 
         </div>
     </div>
+
+
     <script src="/scripts/index.js">
     </script>
+    <script src="/js/app.js"></script>
 </body>
 
 </html>

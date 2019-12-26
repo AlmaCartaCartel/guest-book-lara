@@ -1,21 +1,24 @@
-async function getComments() {
-    let response = await fetch('/comments/all');
+async function getComments(page) {
+    let response = await fetch(page);
 
     if (!response.ok){
         throw new Error(
             `Не удалось запросить данные по адресу`
         );
     }
-    return response.json();
+    let comments = document.getElementById('comments');
+    comments.innerHTML = await response.text();
+
+    paginateSet();
+    applyPostId();
 }
 
 function addComment(comment){
     const allAnswers = document.querySelectorAll('.answers');
-
     comment.then(
         res => {
             if (res.comment_id == 0){
-                document.getElementById('comments').appendChild(createComment(res))
+                document.querySelector('.comments').appendChild(createComment(res))
             }else{
                 for (let elem of allAnswers){
                     let bool = false;
@@ -48,10 +51,6 @@ function createComment(comment, bool = false, removebtn = false) {
         answer = '';
     }
 
-    if (removebtn){
-        answer = '';
-    }
-
     const isNewComment = `<span class="badge badge-success">New</span>`;
     const auth = document.getElementById('comments').dataset.auth;
 
@@ -61,13 +60,9 @@ function createComment(comment, bool = false, removebtn = false) {
             <h3 class="author">${comment.user_name}
                 ${bool ? isNewComment: ''}
             </h3>
-
             <pre>${comment.message}</pre>
-
             <div class="d-flex justify-content-between">
-
                 ${auth ? answer: ''}
-
                 <span>${comment.updated_at}</span>
             </div>
         </div>
@@ -76,19 +71,6 @@ function createComment(comment, bool = false, removebtn = false) {
 
     li.innerHTML = Comment;
     return li;
-}
-
-function renderComments(arr, container = null){
-    if (container === null){
-        container = document.getElementById('comments');
-    }
-    for (let comment of arr){
-        let com = createComment(comment);
-        container.appendChild(com);
-        if (comment.answers.length > 0){
-            renderComments(comment.answers,  com.querySelector('ul'));
-        }
-    }
 }
 
 function applyPostId() {
@@ -106,17 +88,11 @@ function applyPostId() {
         })
     }
 }
-getComments().then(
-    res => {
-        renderComments(res);
-    }
-).then(() => applyPostId());
-
 let form = document.getElementById('form');
 
 if (form !== null){
     btn = document.getElementById('submit');
-    form.addEventListener('submit',    async function (event) {
+    form.addEventListener('submit',async function (event) {
         event.preventDefault();
 
         let response = await fetch('/comments/add',{
@@ -128,9 +104,25 @@ if (form !== null){
                 `Не удалось запросить данные по адресу`
             );
         }
-
         await addComment(response.json());
+
         document.getElementById('textarea').value = '';
         document.querySelector('.comment_id').value = '0';
     });
 }
+
+function paginateSet() {
+    let paginate = document.querySelector('.pagination');
+
+    let links = paginate.getElementsByTagName('a');
+
+    for (let link of links){
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            let page = link.href;
+
+            getComments(page);
+        })
+    }
+}
+// getComments('/comments/all?page=1');

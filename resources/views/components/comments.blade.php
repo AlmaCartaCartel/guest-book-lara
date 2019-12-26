@@ -18,9 +18,9 @@
                        <h3 class="author">
                            <?php echo $comment -> user_name ?>
                        </h3>
-                       <pre>
-                           <?php echo $comment -> message ?>
-                       </pre>
+
+                       <pre style="overflow:  hidden"><?php echo $comment -> message ?></pre>
+
                        <div class="d-flex justify-content-between">
                            <?php echo $answer?>
                            <span><?php echo $comment -> updated_at ?></span>
@@ -37,4 +37,5 @@
 <div class="comments">
     <?php renderComments($comments); ?>
 </div>
-    {{ $comments-> links() }}
+
+{{ $comments-> links() }}
